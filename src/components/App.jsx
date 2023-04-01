@@ -31,19 +31,18 @@ export class App extends Component {
   }
 
   addContact = ({ name, number }) => {
-    const contact = {
-      id: shortid.generate(),
-      name,
-      number,
-    };
     const isOnContacts = this.state.contacts.find(item => {
-      return item.name === contact.name;
+      return item.name.toLowerCase() === name.toLowerCase();
     });
 
     if (isOnContacts) {
       return alert(`${name} is already in contacts`);
     }
-
+    const contact = {
+      id: shortid.generate(),
+      name,
+      number,
+    };
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
     }));
